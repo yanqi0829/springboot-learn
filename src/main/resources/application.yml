@@ -1,6 +1,6 @@
 server:
   port: 8089
-
+#测试发现 优先使用yml配置文件  后加载properties
 person:
   age: 18
   boss: false
