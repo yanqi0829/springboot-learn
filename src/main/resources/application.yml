@@ -13,3 +13,6 @@ person:
     name: xiaogou
     age: 12
   last-name: lisisi
+spring:
+  profiles:
+    active: dev
