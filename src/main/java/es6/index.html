@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #dd {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+    </style>
     <script>
         //声明变量
         let a;
@@ -74,18 +81,96 @@
         let a2 = "是个好演员";
         console.log(`${a1}确实${a2}`);
         //简化写法
-        let myname='Lucy';
-        let age=12;
-        const people={
+        let myname = 'Lucy';
+        let age = 12;
+        const people = {
             myname,
             age,
-            improve:function () {
+            improve: function () {
                 console.log('是的');
             }
         }
+        //箭头函数
+        let fn = function () {
+
+        }
+        let fn1 = () => {
+        }
+
+        //1.this是静态的，this始终指向函数声明时所在作用域下的this的值
+        function getName() {
+            console.log(this.name);
+        }
+
+        let getName2 = () => {
+            console.log(this.name);
+        }
+        window.name = "XUE XI";
+        getName();  //XUE XI
+        getName2(); //XUE XI
+        //call方法调用，call方法是可以改变函数内部this的值的
+        const school = {
+            name: "社会"
+        }
+        getName.call(school);//社会
+        getName2.call(school);//XUE XI
+        //省略
+        let shenglue = a => {
+            return a + 1;
+        }
+        let shenglue2 = a => a + 1;
+        // 案例2-返回数组中偶数元素
+        let arr1 = [1, 235, 56, 6, 7, 5, 54];
+        const doublearr = arr1.filter(item => item % 2 === 0);
+        console.log(doublearr);
+
+        function f2({username, password}) {
+            console.log(username);
+        }
+
+        f2({username: "aa", password: "bb"});
+
+        function f3(...arg) {
+            console.log(arg);
+        }
+
+        f3(1, 22, 3, 34);
+
+        const arr45 = ['ghj', 'dfg', 'asd'];
+        f1(...arr45);// 相当于f1('ghj','dfg','asd')
+
+        //#################Symbol################
+        //Symbol创建
+        let s = Symbol();
+        let s2 = Symbol("REACT");
+        let s3 = Symbol("REACT");
+        console.log(s2 === s3);//false
+        //Symbol.for创建
+        let s4 = Symbol.for("REACT");
+        let s5 = Symbol.for("REACT");
+        console.log(s4 === s5);//true
+        //生成器函数
+        function  * f4() {
+            console.log('第一段');
+            yield '1';
+            yield '2';
+            yield '3';
+        }
+        let strings = f4();
+        console.log(strings.next());
+        // console.log(strings.next());
+        // console.log(strings.next());
+        // console.log(strings.next());
+
+
     </script>
 </head>
 <body>
-
+<div id="dd"></div>
+<script>
+    let ddd = document.getElementById('dd');
+    ddd.addEventListener("click", function () {
+        setTimeout(() => this.style.backgroundColor = 'pink', 2000);
+    });</script>
 </body>
 </html>

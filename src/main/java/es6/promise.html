@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+</head>
+<body>
+
+
+<script>
+    //实例化Promise对象
+    const a = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            let data = "获取数据库数据";//获取数据后，可以调用resolve或reject 来改变a的状态
+            resolve(data);//调用resovle，a的状态变为成功
+        }, 1000);
+    });
+    //调用Promise的then方法
+    a.then(function (value) {  //调用resovle,则会执行第一个方法
+        console.log(value);  //获取数据库数据
+    }, function (reason) {//调用reject,则会执行第二个方法
+
+    });
+    /* const fs = required('fs');
+     const p = new Promise(function (resolve, reject) {
+         fs.readFile("1.txt", (err, data) => {
+             if (err) reject(err);
+             resolve(data);
+         })
+     });
+     p.then(function (value) {  //调用resovle,则会执行第一个方法
+         console.log(value);  //获取数据库数据
+     }, function (reason) {//调用reject,则会执行第二个方法
+         console.log("Read Err");
+     });*/
+    //_________________________________
+    const b = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            let data = "获取数据库数据";
+            resolve(data);
+        }, 1000);
+    });
+
+    let result = b.then(function (value) {
+        console.log(value);
+        //非Promise
+        return 123;
+        //Promise
+        //抛出异常
+    }, function (reason) {
+
+    });
+    console.log(result)
+
+</script>
+</body>
+</html>
