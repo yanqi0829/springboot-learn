@@ -5,7 +5,9 @@
     <title>Title</title>
     <!-- 在线加载 React。-->
     <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <!--    react核心库-->
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!--    react扩展库：react操作dom-->
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
@@ -16,12 +18,34 @@
 <script type="text/babel">
     // const hello='asdasdasd';
     // ReactDOM.render(<h1>{hello}</h1>, document.getElementById("root"));
-
+    const nihao = (
+        <h1>
+            <span>nihao</span>
+        </h1>
+    )
 
     ReactDOM.render(<h1>hello</h1>,
         document.getElementById("root")
     );
+    //ReactDOM.render(虚拟DOM，容器)
     // ReactDOM.render(React.createElement('h1',"","hello"), document.getElementById("root"));
+
+    const VDOM = document.getElementById('root');
+    console.log("虚拟DOM" + nihao);
+    console.log("真实DOM" + VDOM);
+
+    //JSX语法
+
+    const arr = ['java', 'ract', 'c'];
+    const name = (
+        <ul>
+            {arr.map((item, index) => {
+                <li key={index}>{item} </li>
+            })}
+        </ul>
+    )
+
+
 </script>
 
 </body>
