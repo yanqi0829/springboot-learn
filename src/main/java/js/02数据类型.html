@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var a = "123";
+    var b = 123;
+    console.log(typeof a);//string
+    console.log(typeof b);//number
+    console.log(Number.MAX_VALUE);//1.7976931348623157e+308
+    var c = Number.MAX_VALUE * Number.MAX_VALUE;
+    console.log(c);//Infinity
+    var d = Infinity;
+    console.log(typeof Infinity);//number
+    var e = "asd" * "abc";
+    console.log(e);//NaN
+    console.log(typeof e);//number
+    var f = 0.1 + 0.2;
+    console.log(f);//0.30000000000000004
+    var g = null;
+    console.log(typeof g);//object
+    var h;
+    console.log(typeof h);//undefined
+    var aa = 123;
+    var bb = aa.toString();
+    var cc = String(aa);
+    console.log(typeof bb);//string
+    console.log(typeof cc);//string
+    //强转成number
+    var dd = "123";
+    var ddd = Number(dd);
+    console.log(typeof ddd);
+    var ee = "abc";
+    var eee = Number(ee);
+    console.log(eee);//NaN
+    console.log(typeof eee);
+    var ff = "";
+    var fff = Number(ff);
+    console.log(fff);
+    console.log(typeof fff);
+    var z = "123px";
+    z = parseInt(z);
+    console.log(z);//123
+    //new 关键字创建对象
+    var obj = new Object();
+    console.log(typeof obj);//object
+    obj.name = "Lucy";
+    console.log(obj);//{name: "Lucy"}
+    console.log(obj.name);
+    console.log(obj.hello);//undefined
+   //删除name属性
+    delete obj.name;
+    //使用特殊的属性名
+    obj["123"]=789;
+    console.log(obj["123"]);
+    console.log(obj);//{123: 789}
+    console.log("123" in obj);//true
+
+    var ab={
+        name:"LILI",
+        age:19
+    }
+    for(var n in ab){
+        console.log(ab[n]);
+    }
+</script>
+</body>
+</html>

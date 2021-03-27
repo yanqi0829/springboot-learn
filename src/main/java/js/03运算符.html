@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var result = true + 1;
+    console.log(result);//2
+    var a = undefined;
+    console.log(a + 1);//NaN
+    var b = null;
+    console.log(b + 1);//1
+    var c = "123";
+    console.log(+c);
+
+    var e = null;
+    console.log(!e);//true
+    //true&&true
+    console.log(1 && 2);//2
+    //fasle&&true
+    var result = 0 && 2;//0
+    //true&&false
+    result = 2 && 0;//0
+    //false&&false
+    result = NaN && 0;//NaN
+    //false&&false
+    result = 0 && NaN;//0
+    console.log(1||2);//1
+    console.log(0||2)//2
+    console.log("1"==1)//true
+    console.log("1"===1)//false
+    console.log(null==undefined)//true
+
+</script>
+
+</body>
+</html>

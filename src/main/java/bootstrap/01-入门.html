@@ -22,5 +22,19 @@
 <script src="js/jquery-3.4.1.js"></script>
 <!-- 包括所有bootstrap的js插件或者可以根据需要使⽤的js插件调⽤　-->
 <script src="js/bootstrap.min.js"></script>
+<script>
+    function all() {
+        $.ajax({
+            url:"",
+            data:{"name":$("textName").val()},
+            sucess:function (data,status) {  //data封装了服务器返回的数据
+                console.log(data)
+                console.log(status) //状态
+            }
+        });
+    }
+</script>
+<!--演示Query Ajax-->
+<input type="text" id="textName" onblur="all()">
 </body>
 </html>

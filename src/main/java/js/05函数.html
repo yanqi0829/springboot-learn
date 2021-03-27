@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    var fun = new Function("console.log('你好!');");
+    console.log(typeof fun);//function
+    fun();
+
+    function f1() {
+        console.log("函数声明创建");
+    }
+
+    f1();
+    var f2 = function () {
+        console.log("函数表达式创建");
+    };
+
+    var result = f1();
+    console.log(result);//undefined
+    //函数的形参可以是函数
+    function f(aaa) {
+        aaa();
+    }
+    function sss() {
+        console.log("函数形参");
+    }
+    f(sss);
+
+    function f3() {
+        function f4() {
+            alert(11111);
+        }
+        return f4;
+    }
+    // f3()();
+
+    (function() {
+        console.log("立即执行函数");
+    })();
+    var obj={
+        name:"莉莉",
+        sayHello:function () {
+            console.log("你好");
+        }
+    };
+</script>
+</body>
+</html>

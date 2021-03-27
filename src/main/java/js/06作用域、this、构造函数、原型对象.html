@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    console.log(window);
+    var a = 10;
+    console.log(window.a);
+
+    function f() {
+        console.log("我是f函数");
+    }
+
+    window.f();
+    // window.alert("haha");
+    var b;
+    console.log(b);//undefined
+    b = 12;
+
+    f1();
+
+    function f1() {
+        console.log("f1");
+    }
+
+    function f2() {
+        var b = "我是f2";
+        console.log(b);
+        console.log(window.b);
+    }
+
+    //this
+    function f3(a) {
+        console.log(this);
+    }
+
+    f3(12);//Window
+
+    var obj = {
+        name: "12",
+        sayHello: f3
+    }
+    obj.sayHello(12);//{name: "12", sayHello: ƒ}
+
+    function Person() {
+        this.name = "人嘞";
+        this.age = 12;
+    }
+
+    var p = new Person();
+
+    console.log(p instanceof Person);
+
+    //原型对象
+    function MyClass() {
+
+    }
+    MyClass.prototype.a=123;
+    MyClass.prototype.say=function () {
+        console.log(this);
+    }
+    var myClass = new MyClass();
+    console.log(MyClass.prototype);
+    console.log(myClass.__proto__==MyClass.prototype);
+    console.log(myClass.a);
+
+    //in 检查对象 原型中有也会返回true
+    console.log("a" in myClass); //true
+    //检查对象自身是否含有属性
+    console.log(myClass.hasOwnProperty("a"));//false
+    console.log(myClass.__proto__.__proto__.hasOwnProperty("hasOwnProperty"));
+</script>
+</body>
+</html>
