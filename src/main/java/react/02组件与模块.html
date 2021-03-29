@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!--    react扩展库：react操作dom-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    //函数式组件
+    function MyComponent() {
+        console.log(this);//此处的this是undefined ，因为babel翻译后开启了严格模式
+        return <span> 函数组件</span>;
+    }
+
+    //渲染组件到页面
+    ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+
+
+    //类的基本
+    class Person {
+        //构造方法
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        speak(){
+            console.log(`I am ${this.name}`)
+        }
+    }
+
+    const p1 = new Person("zhang", 12);
+    console.log(p1);//Person {name: "zhang", age: 12}
+
+</script>
+
+</body>
+</html>
