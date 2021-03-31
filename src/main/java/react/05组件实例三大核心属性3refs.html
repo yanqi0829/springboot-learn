@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!--    react扩展库：react操作dom-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    引入 prop-types  用于对标签属性进行限制-->
+    <script src="./prop-types.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    class Demo extends React.Component {
+        myRef = React.createRef()//存储ref所标识的节点
+
+
+        showData = () => {
+            console.log(this);
+            //获得输入框的内容
+            console.log(this.refs.input1);
+            const {input1} = this.refs;
+            alert(input1.value);
+        }
+        showData2 = () => {
+            console.log(this);
+            const {input2} = this;
+            alert(input2.value);
+        }
+        showData3 = (c) => {
+            this.input3 = c;
+            alert(this.input3.value);
+        }
+
+        showData4 = () => {
+            console.log(this.myRef);
+            alert(this.myRef.current.value);
+        }
+
+        render() {
+            return (
+                <div>
+                    {/*字符串形式*/}
+                    <input ref="input1" type="text" placeholder="点击按钮提示数据"/>
+                    <button onClick={this.showData}>点击显示左侧数据</button>
+                    {/*回调形式*/}
+                    <input ref={(currentNode) => {
+                        this.input2 = currentNode
+                    }} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
+                    {/*class绑定函数的方式*/}
+                    <input ref={this.saveInput} onBlur={this.showData3} type="text" placeholder="失去焦点提示数据"/>
+                    {/*createRef的方式*/}
+                    <input ref={this.myRef} onBlur={this.showData4} type="text" placeholder="失去焦点提示数据"/>
+
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Demo/>, document.getElementById('root'));
+</script>
+
+</body>
+</html>

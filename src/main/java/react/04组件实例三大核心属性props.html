@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!--    react扩展库：react操作dom-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    引入 prop-types  用于对标签属性进行限制-->
+    <script src="./prop-types.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<div id="root1"></div>
+<script type="text/babel">
+    class Person extends React.Component {
+        render() {
+            console.log(this);
+            const {name, age, sex} = this.props;
+            return (
+                <ul>
+                    <li>姓名：{name}</li>
+                    <li>年龄{age + 1}：</li>
+                    <li>性别：{sex}</li>
+                </ul>
+            )
+        }
+        static propTypes = {
+            name: PropTypes.string.isRequired,
+            sex: PropTypes.string,
+            age: PropTypes.number,
+            speak: PropTypes.func,
+        }
+        //指定默认标签属性值
+        static defaultProps = {
+            sex: '男'
+        }
+    }
+
+    //对标签属性进行类型、必要性的限制
+   /* Person.propTypes = {
+        name: PropTypes.string.isRequired,
+        sex: PropTypes.string,
+        age: PropTypes.number,
+        speak: PropTypes.func,
+    }
+    //指定默认标签属性值
+    Person.defaultProps = {
+        sex: '男'
+    }*/
+
+    //渲染组件到页面
+    ReactDOM.render(<Person name='Lucy' age={18} speak={speak}/>, document.getElementById('root'));
+    //上行代码的语法糖
+    const p = {name: "Lucy", age: 18, sex: '男'};
+    ReactDOM.render(<Person {...p}/>, document.getElementById('root1'));//{...对象}  仅仅在React组件中传值时使用
+
+    function speak() {
+
+    }
+</script>
+</body>
+</html>
