@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!--    react扩展库：react操作dom-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    class Weather extends React.Component {
+        //构造函数只在组件实例化时 调用一次
+        constructor(props) {
+            super(props);
+            this.state = {isHot: true}//原本的state属性为null，借助构造器初始化state
+            this.changeWeather = this.changeWeather.bind(this);//bind:①生成新的函数 ②更改函数中的this
+        }
+
+        //render 调用1+n 次   初始化调用一次  n是  setState状态更新次数
+        render() {//render存放在 MyClass的原型对象上  供实例使用
+            const {isHot} = this.state;
+            console.log(this);
+            return <h2 onClick={this.changeWeather}> {isHot ? '天气炎热' : '天气寒冷'}</h2>//chageWeather 不要写成  chageWeather()不是调用返回值赋给onClick
+        }
+
+        changeWeather() {
+            //通过Weather实例调用changeWeather时，this就是Weather实例
+            //changeWeather是作为onClick的回调，不是通过实例调用的，是直接调用
+            console.log(this);//类中的方法开启了局部严格模式，changeWeather中的this为undefined
+            const {isHot} = this.state;
+            // this.state.isHot=!isHot;//错误！！！状态state不能直接更改，需借助内置API
+
+            this.setState({isHot: !isHot});
+        }
+
+        /*state 简写
+        类中可以直接写赋值语句
+        state={isHot: true};
+        //自定义方法---要用赋值语句+箭头函数
+        changeWeather = () => { //箭头函数没有this 向外层找
+            const {isHot} = this.state;
+            this.setState({isHot: !isHot});
+            console.log(this);
+        }
+        */
+
+
+    }
+    //渲染组件到页面
+    ReactDOM.render(<Weather/>, document.getElementById('root'));
+</script>
+</body>
+</html>

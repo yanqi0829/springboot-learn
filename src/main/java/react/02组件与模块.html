@@ -10,11 +10,12 @@
 </head>
 <body>
 <div id="root"></div>
+<div id="root1"></div>
 <script type="text/babel">
     //函数式组件
     function MyComponent() {
         console.log(this);//此处的this是undefined ，因为babel翻译后开启了严格模式
-        return <span> 函数组件</span>;
+        return <span> 函数组件，适用于简单组件</span>;
     }
 
     //渲染组件到页面
@@ -28,13 +29,39 @@
             this.name = name;
             this.age = age;
         }
-        speak(){
-            console.log(`I am ${this.name}`)
+
+        speak() {  //在类的原型对象上，供实例使用
+            console.log(`I am ${this.name},年龄${this.age}`);
+
         }
     }
 
     const p1 = new Person("zhang", 12);
     console.log(p1);//Person {name: "zhang", age: 12}
+    p1.speak();
+    console.log(p1.__proto__.hasOwnProperty('speak'));//speak方法在类的原型上面
+
+    // 创建一个student类 继承于Person类
+    class Student extends Person {
+        constructor(name, age, grade) {
+            super(name, age);
+            this.grade = grade;
+        }
+    }
+
+    const st1 = new Student("li", 123, "一年级");//没有写构造函数，继承自父类
+    console.log(st1);
+
+
+    //类式组件
+    class MyClass extends React.Component {
+        render(){//render存放在 MyClass的原型对象上  供实例使用
+            console.log(this);
+            return<h2> 类组件，适用于复杂组件</h2>
+        }
+    }
+    //渲染组件到页面
+    ReactDOM.render(<MyClass/>, document.getElementById('root1'));
 
 </script>
 
