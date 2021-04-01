@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!--    react扩展库：react操作dom-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    引入 prop-types  用于对标签属性进行限制-->
+    <script src="./prop-types.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<div id="root1"></div>
+<script type="text/babel">
+    //受控组件
+    class Demo extends React.Component {
+        state = {
+            username: '',
+            password: ''
+        }
+        handleSubmit = (event) => {
+            event.preventDefault();//阻止表单默认提交
+            const {username, password} = this.state;
+            alert(`用户名${username}, ${password}`);
+
+        }
+        /*  高阶函数：如果一个函数符合下面2个规范中的任意一个，那该函数就是高阶函数。
+          1.若A函数，接收的参数是一个函数，那么A就可以称为高阶函数
+          2.若A函数，调用的返回值仍然是一个函数，那么A就可以称为高阶函数*/
+        saveFormData = (dataType) => {
+            return (event) => {
+                console.log(dataType, event.target.value);
+                this.setState({[dataType]: event.target.value}); //[dataType] 代表名为dataType的属性
+            }
+        }
+
+        /*输入类的DOM需要一种通用的回调函数，但是 saveFormData后虽然将参数传递了 ，但是这种
+        * 方式将saveFormData函数的返回结果给onChange进行回调,则需要saveFormData返回一个函数
+        * */
+        render() {
+            return (
+                <form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
+                    <input onChange={this.saveFormData('username')} type="text" name="username"/>
+                    <input onChange={this.saveFormData('password')} type="password" name="password"/>
+                    <button>登录</button>
+                </form>
+            )
+        }
+    }
+
+    ReactDOM.render(<Demo/>, document.getElementById('root'));
+</script>
+
+</body>
+</html>

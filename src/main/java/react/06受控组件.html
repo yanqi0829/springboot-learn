@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!--    react扩展库：react操作dom-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    引入 prop-types  用于对标签属性进行限制-->
+    <script src="./prop-types.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<div id="root1"></div>
+<script type="text/babel">
+    //受控组件
+    class Demo extends React.Component {
+        state = {
+            username: '',
+            password: ''
+        }
+        handleSubmit = (event) => {
+            event.preventDefault();//阻止表单默认提交
+            const {username, password} = this.state;
+            alert(`用户名${username}, ${password}`);
+
+        }
+        saveUsername = (event) => {
+            console.log(event.target.value);
+            this.setState({username: event.target.value});
+        }
+
+        savePassword = (event) => {
+            console.log(event.target.value);
+            this.setState({password: event.target.value});
+        }
+
+        render() {
+            return (
+                <form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
+                    <input onChange={this.saveUsername} type="text" name="username"/>
+                    <input onChange={this.savePassword} type="password" name="password"/>
+                    <button>登录</button>
+                </form>
+            )
+        }
+    }
+
+    ReactDOM.render(<Demo/>, document.getElementById('root'));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!--    react扩展库：react操作dom-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    引入 prop-types  用于对标签属性进行限制-->
+    <script src="./prop-types.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<div id="root1"></div>
+<script type="text/babel">
+    //非受控组件
+    class Demo extends React.Component {
+        handleSubmit = (event) => {
+            event.preventDefault();//阻止表单默认提交
+            const {username, password} = this;
+            alert(`用户名${username.value}, ${password.value}`);
+        }
+
+        render() {
+            return (
+                <form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
+                    <input ref={c => this.username = c} type="text" name="username"/>
+                    <input ref={c => this.password = c} type="password" name="password"/>
+                    <button>登录</button>
+                </form>
+            )
+        }
+    }
+    ReactDOM.render(<Demo/>, document.getElementById('root'));
+</script>
+
+</body>
+</html>
