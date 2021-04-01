@@ -44,6 +44,11 @@
                 <form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
                     <input onChange={this.saveFormData('username')} type="text" name="username"/>
                     <input onChange={this.saveFormData('password')} type="password" name="password"/>
+                    {/*不使用柯里化的思想也可以，onChange需要回调函数，直接造一个函数即可
+
+                      <input onChange={event=>this.saveFormData('password',event)} type="password" name="password"/>
+                    */}
+
                     <button>登录</button>
                 </form>
             )
